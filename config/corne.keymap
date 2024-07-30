@@ -55,7 +55,7 @@
             bindings = <
 &kp TAB    &kp EXCL  &kp AT   &kp HASH   &kp DLLR      &kp PRCNT    &kp CARET     &kp AMPS    &kp ASTRK  &kp LPAR   &kp RPAR  &kp BSPC
 &trans     &kp DQT   &kp SQT  &kp LBRC   &kp LBKT      &trans       &kp LEFT      &kp DOWN    &kp UP     &kp RIGHT  &trans    &trans
-&kp LSHFT  &trans    &trans   &kp SLASH  &kp QUESTION  &kp RA(E)    &kp CAPSLOCK  &kp LS(F2)  &trans     &trans     &trans    &trans
+&kp LSHFT  &trans    &trans   &kp RA(Q)  &kp RA(W)     &kp RA(E)    &kp CAPSLOCK  &kp LS(F2)  &trans     &trans     &trans    &trans
                               &kp LGUI   &trans        &kp SPACE    &kp RET       &trans      &kp RALT
             >;
         };
