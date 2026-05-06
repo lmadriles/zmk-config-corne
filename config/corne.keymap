@@ -11,7 +11,7 @@
 #define DEFAULT 0
 #define LOWER   1
 #define RAISE   2
-#define ADJUST  3
+#define TOGGLE  3
 
 // ABNT2 aliases (firmware envia keycode US; OS interpreta como ABNT2)
 #define BR_ACUTE  LBKT    // ´
@@ -23,20 +23,11 @@
 #define BR_TREMA  CARET   // ¨
 
 / {
-    combos {
-        compatible = "zmk,combos";
-
-        combo_adjust {
-            timeout-ms = <60>;
-            key-positions = <37 40>;
-            bindings = <&tog ADJUST>;
-        };
-    };
-
     keymap {
         compatible = "zmk,keymap";
 
         default_layer {
+            display-name = "Default";
             // -----------------------------------------------------------------------------------------
             // |  TAB |  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U  |  I  |  O  |  P  |  `   |
             // | CTRL |  A  |  S  |  D  |  F  |  G  |   |  H  |  J  |  K  |  L  |  Ç  |  DEL |
@@ -52,6 +43,7 @@
         };
 
         lower_layer {
+            display-name = "Lower";
             // -----------------------------------------------------------------------------------------
             // |  TAB |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  | BKSP  |
             // | CTRL |  ^  |  ~  |  `  |  ´  |     |   |  -  |  =  | NUBS|  ]  |  \  | GRAVE |
@@ -67,6 +59,7 @@
         };
 
         raise_layer {
+            display-name = "Raise";
             // -----------------------------------------------------------------------------------------
             // |  TAB |  !  |  @  |  #  |  $  |  %  |   |  ¨  |  &  |  *  |  (  |  )  | BKSP |
             // |      |  ^  |  ~  |  `  |  ´  |     |   | LFT | DWN |  UP | RGT |     |      |
@@ -81,7 +74,8 @@
             >;
         };
 
-        adjust_layer {
+        toggle_layer {
+            display-name = "Toggle";
             // -----------------------------------------------------------------------------------------
             // |      | F1  | F2  | F3  | F4  | F5  |   | F6  | F7  | F8  | F9  | F10 |      |
             // |      | F11 | F12 |     |     |     |   |BTCLR| BT0 | BT1 | BT2 | BT3 | BT4  |
@@ -92,10 +86,16 @@
 &trans  &kp F1   &kp F2   &kp F3  &kp F4       &kp F5    &kp F6      &kp F7       &kp F8       &kp F9       &kp F10      &trans
 &trans  &kp F11  &kp F12  &trans  &trans        &trans    &bt BT_CLR  &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4
 &trans  &trans   &trans   &trans  &trans        &trans    &trans      &trans       &trans       &trans       &trans       &trans
-                          &trans  &tog ADJUST   &trans    &trans      &tog ADJUST  &trans
+                          &trans  &tog TOGGLE   &trans    &trans      &tog TOGGLE  &trans
             >;
         };
     };
 
-    conditional_layers { compatible = "zmk,conditional-layers"; };
+    conditional_layers {
+        compatible = "zmk,conditional-layers";
+        tri_layer {
+            if-layers = <1 2>;
+            then-layer = <3>;
+        };
+    };
 };
