@@ -48,13 +48,13 @@
             // |  TAB |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  | BKSP  |
             // | CTRL |  ^  |  ~  |  `  |  ´  |     |   |  -  |  =  | NUBS|  ]  |  \  | GRAVE |
             // | SHFT |     |     |     |     |     |   |  _  |  +  |  |  |  }  |  |  | TILDE |
-            //                    | GUI |     | SPC |   | ENT |     | RALT |
+            //                    | GUI |     | SPC |   | ENT | TGL | BKSP |
 
             bindings = <
 &kp TAB    &kp N1       &kp N2       &kp N3       &kp N4       &kp N5       &kp N6     &kp N7     &kp N8     &kp N9    &kp N0    &kp BSPC
 &kp LCTRL  &kp BR_CIRC  &kp BR_TILDE &kp BR_GRAVE &kp BR_ACUTE &trans       &kp MINUS  &kp EQUAL  &kp NUBS   &kp RBKT  &kp BSLH  &kp GRAVE
 &kp LSHFT  &trans       &trans       &trans       &trans       &trans       &kp UNDER  &kp PLUS   &kp PIPE2  &kp RBRC  &kp PIPE  &kp TILDE
-                                     &kp LGUI     &trans       &kp SPACE    &kp RET    &trans     &kp RALT
+                                     &kp LGUI     &trans       &kp SPACE    &kp RET    &tog TOGGLE  &kp BSPC
             >;
         };
 
@@ -64,38 +64,31 @@
             // |  TAB |  !  |  @  |  #  |  $  |  %  |   |  ¨  |  &  |  *  |  (  |  )  | BKSP |
             // |      |  ^  |  ~  |  `  |  ´  |     |   | LFT | DWN |  UP | RGT |     |      |
             // | SHFT |     |     |RA(Q)|RA(W)|RA(E)|   | CAPS| SF2 |     |     |     |      |
-            //                    | GUI |     | SPC |   | ENT |     | RALT |
+            //                    | GUI | TGL | SPC |   | ENT |     | RALT |
 
             bindings = <
 &kp TAB    &kp EXCL     &kp AT       &kp HASH     &kp DLLR      &kp PRCNT    &kp BR_TREMA  &kp AMPS    &kp ASTRK  &kp LPAR   &kp RPAR  &kp BSPC
 &trans     &kp BR_CIRC  &kp BR_TILDE &kp BR_GRAVE &kp BR_ACUTE  &trans       &kp LEFT      &kp DOWN    &kp UP     &kp RIGHT  &trans    &trans
 &kp LSHFT  &trans       &trans       &kp RA(Q)    &kp RA(W)     &kp RA(E)    &kp CAPSLOCK  &kp LS(F2)  &trans     &trans     &trans    &trans
-                                     &kp LGUI     &trans        &kp SPACE    &kp RET       &trans      &kp RALT
+                                     &kp LGUI     &tog TOGGLE   &kp SPACE    &kp RET       &trans      &kp RALT
             >;
         };
 
         toggle_layer {
             display-name = "Toggle";
             // -----------------------------------------------------------------------------------------
-            // |      | F1  | F2  | F3  | F4  | F5  |   | F6  | F7  | F8  | F9  | F10 |      |
-            // |      | F11 | F12 |     |     |     |   |BTCLR| BT0 | BT1 | BT2 | BT3 | BT4  |
-            // |      |     |     |     |     |     |   |     |     |     |     |     |      |
-            //                    |     | [X] |     |   |     | [X] |     |
+            // | [X]  | F1  | F2  | F3  | F4  | F5  |   | F6  | F7  | F8  | F9  | F10 | [X]  |
+            // | [X]  | F11 | F12 | [X] | [X] | [X] |   |BTCLR| BT0 | BT1 | BT2 | BT3 | BT4  |
+            // | [X]  | [X] | [X] | [X] | [X] | [X] |   | [X] | [X] | [X] | [X] | [X] | [X]  |
+            //                    | [X] |     | [X] |   | [X] |     | [X] |
 
             bindings = <
-&trans  &kp F1   &kp F2   &kp F3  &kp F4       &kp F5    &kp F6      &kp F7       &kp F8       &kp F9       &kp F10      &trans
-&trans  &kp F11  &kp F12  &trans  &trans        &trans    &bt BT_CLR  &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4
-&trans  &trans   &trans   &trans  &trans        &trans    &trans      &trans       &trans       &trans       &trans       &trans
-                          &trans  &tog TOGGLE   &trans    &trans      &tog TOGGLE  &trans
+&tog TOGGLE  &kp F1       &kp F2       &kp F3       &kp F4       &kp F5       &kp F6      &kp F7       &kp F8       &kp F9       &kp F10      &tog TOGGLE
+&tog TOGGLE  &kp F11      &kp F12      &tog TOGGLE  &tog TOGGLE  &tog TOGGLE  &bt BT_CLR  &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4
+&tog TOGGLE  &tog TOGGLE  &tog TOGGLE  &tog TOGGLE  &tog TOGGLE  &tog TOGGLE  &tog TOGGLE &tog TOGGLE  &tog TOGGLE  &tog TOGGLE  &tog TOGGLE  &tog TOGGLE
+                          &tog TOGGLE  &trans       &tog TOGGLE  &tog TOGGLE  &trans       &tog TOGGLE
             >;
         };
     };
 
-    conditional_layers {
-        compatible = "zmk,conditional-layers";
-        tri_layer {
-            if-layers = <1 2>;
-            then-layer = <3>;
-        };
-    };
 };
